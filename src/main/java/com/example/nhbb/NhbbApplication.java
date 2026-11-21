@@ -4,8 +4,6 @@ import com.example.nhbb.Service.DatabaseService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.sql.*;
-
 @SpringBootApplication
 public class NhbbApplication {
 
@@ -15,7 +13,7 @@ public class NhbbApplication {
         this.databaseService = databaseService;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) {
         SpringApplication.run(NhbbApplication.class, args);
     }
 }
