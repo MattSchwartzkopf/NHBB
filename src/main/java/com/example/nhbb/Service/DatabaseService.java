@@ -13,25 +13,23 @@ public class DatabaseService {
 
     public static Connection database;
     public static Statement statement;
-
     private final String ADD_ITEM_QUERY = "INSERT INTO inventory (item, quantity) VALUES(?, ?)";
+    private final String NEW_ADD_ITEM_QUERY = "SELECT id, item, quantity FROM inventory WHERE item = ?";
+    private final String UPDATE_ITEM_QUANTITY_QUERY = "UPDATE inventory SET quantity = quantity + ? WHERE item = ?";
+
     private final String SELECT_ALL_INVENTORY_QUERY = "select * from inventory";
+    private final String DATABASE_CONNECTION_URL = "jdbc:mysql://localhost:8889/sys";
+    private final String DATABASE_CONNECTION_USERNAME = "root";
+    private final String DATABASE_CONNECTION_PASSWORD = "root";
+    private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     public DatabaseService() throws SQLException, ClassNotFoundException {
         startDatabase();
     }
 
     public void startDatabase() throws ClassNotFoundException, SQLException {
-        String url = "jdbc:mysql://localhost:8889/sys";
-        String username = "root";
-        String password = "root";
-
-        // Load and register the driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
-
-        // Establish connection
-        database = DriverManager.getConnection(url, username, password);
-        System.out.println("Connection Established successfully");
+        Class.forName(JDBC_DRIVER);
+        database = DriverManager.getConnection(DATABASE_CONNECTION_URL, DATABASE_CONNECTION_USERNAME, DATABASE_CONNECTION_PASSWORD);
     }
 
     public List<InventoryModel> queryAllFromInventoryTable() throws SQLException {
@@ -56,14 +54,38 @@ public class DatabaseService {
         return inventoryModelList;
     }
 
-    public void addItem(InventoryModel item) throws SQLException {
+    public void addInventoryItem(InventoryModel item) throws SQLException {
         InventoryRepository inventoryRepositoryItem = new InventoryRepository();
         inventoryRepositoryItem.setItem(String.valueOf(item.getItem()));
         inventoryRepositoryItem.setQuantity(item.getQuantity());
 
+        // If item doesn't already exists, add new item
+        if (!doesInventoryContainItem(item)) {
+            addNewItemAndQuantity(item);
+        } else { // item exists, update quantity on that item
+            updateItemQuantity(item);
+        }
+    }
+
+    public void addNewItemAndQuantity(InventoryModel item) throws SQLException {
         PreparedStatement preparedStatement = database.prepareStatement(ADD_ITEM_QUERY);
         preparedStatement.setString(1, item.getItem());
         preparedStatement.setString(2, String.valueOf(item.getQuantity()));
         preparedStatement.executeUpdate();
+    }
+
+    public void updateItemQuantity(InventoryModel inventoryModel) throws SQLException {
+        PreparedStatement preparedStatement = database.prepareStatement(UPDATE_ITEM_QUANTITY_QUERY);
+        preparedStatement.setInt(1, inventoryModel.getQuantity());
+        preparedStatement.setString(2, inventoryModel.getItem());
+        preparedStatement.executeUpdate();
+    }
+
+    public boolean doesInventoryContainItem(InventoryModel inventoryModel) throws SQLException {
+        statement = database.createStatement();
+        PreparedStatement preparedStatement = database.prepareStatement(NEW_ADD_ITEM_QUERY);
+        preparedStatement.setString(1, inventoryModel.item);
+        ResultSet rs = preparedStatement.executeQuery();
+        return rs.next();
     }
 }
