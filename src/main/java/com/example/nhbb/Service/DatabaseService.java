@@ -20,18 +20,6 @@ public class DatabaseService {
         startDatabase();
     }
 
-//    public void testDatabaseAndItemAddition() throws SQLException {
-//        InventoryRepository item = new InventoryRepository();
-//        item.setItem("Crankshaft");
-//        item.setQuantity(2);
-//
-//        log.info("Read entire database");
-//        queryAllFromInventoryTable();
-//        addItem(item);
-//        log.info("Read entire database after item addition");
-//        queryAllFromInventoryTable();
-//    }
-
     public void startDatabase() throws ClassNotFoundException, SQLException {
         String url = "jdbc:mysql://localhost:8889/sys"; // Database details
         String username = "root"; // MySQL credentials

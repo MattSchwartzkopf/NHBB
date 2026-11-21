@@ -1,13 +1,10 @@
 package com.example.nhbb.Controller;
 
 import com.example.nhbb.Model.InventoryModel;
-import com.example.nhbb.Repository.InventoryRepository;
 import com.example.nhbb.Service.DatabaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -36,6 +33,4 @@ public class InventoryController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Added item: " + inventoryModel.getItem() + " " + inventoryModel.getQuantity());
     }
-
-
 }
