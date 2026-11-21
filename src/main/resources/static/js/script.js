@@ -1,4 +1,3 @@
-// Get All Inventory Items from database
 async function getInventory() {
     const url = "http://localhost:8080/inventory/getInventory";
 
@@ -38,7 +37,7 @@ async function addItem() {
     } catch (error) {
         console.error("Error adding item:", error);
     }
-    displayInventory();
+    await displayInventory();
 }
 
 document.getElementById("submit").addEventListener("click", addItem);
@@ -67,4 +66,3 @@ async function displayInventory() {
     tableHTML += "</table>";
     document.getElementById("inventoryTable").innerHTML = tableHTML;
 }
-// END of getInventory
