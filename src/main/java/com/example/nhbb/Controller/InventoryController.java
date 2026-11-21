@@ -29,4 +29,10 @@ public class InventoryController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Added item: " + inventoryModel.getItem() + " " + inventoryModel.getQuantity());
     }
+
+    @DeleteMapping(value = "/deleteItem")
+    public ResponseEntity<String> deleteItem(@RequestParam String itemName, int quantity) throws SQLException {
+        inventoryService.deleteInventoryItem(itemName, quantity);
+        return ResponseEntity.status(HttpStatus.OK).body("Delete successful!");
+    }
 }

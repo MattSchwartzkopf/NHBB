@@ -22,4 +22,8 @@ public class InventoryService {
     public void addInventoryItem(InventoryModel inventoryModel) throws SQLException {
         databaseService.addInventoryItem(inventoryModel);
     }
+
+    public void deleteInventoryItem(String itemName, int quantity) throws SQLException {
+        databaseService.deleteItemFromInventory(itemName, quantity);
+    }
 }

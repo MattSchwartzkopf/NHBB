@@ -16,7 +16,7 @@ public class DatabaseService {
     private final String ADD_ITEM_QUERY = "INSERT INTO inventory (item, quantity) VALUES(?, ?)";
     private final String NEW_ADD_ITEM_QUERY = "SELECT id, item, quantity FROM inventory WHERE item = ?";
     private final String UPDATE_ITEM_QUANTITY_QUERY = "UPDATE inventory SET quantity = quantity + ? WHERE item = ?";
-
+    private final String DELETE_ITEM_QUERY = "UPDATE inventory SET quantity = quantity - ? WHERE item = ? AND quantity >= ?";
     private final String SELECT_ALL_INVENTORY_QUERY = "select * from inventory";
     private final String DATABASE_CONNECTION_URL = "jdbc:mysql://localhost:8889/sys";
     private final String DATABASE_CONNECTION_USERNAME = "root";
@@ -78,6 +78,14 @@ public class DatabaseService {
         PreparedStatement preparedStatement = database.prepareStatement(UPDATE_ITEM_QUANTITY_QUERY);
         preparedStatement.setInt(1, inventoryModel.getQuantity());
         preparedStatement.setString(2, inventoryModel.getItem());
+        preparedStatement.executeUpdate();
+    }
+
+    public void deleteItemFromInventory(String itemName, int quantity) throws SQLException {
+        PreparedStatement preparedStatement = database.prepareStatement(DELETE_ITEM_QUERY);
+        preparedStatement.setInt(1, quantity);
+        preparedStatement.setString(2, itemName);
+        preparedStatement.setInt(3, quantity);
         preparedStatement.executeUpdate();
     }
 
