@@ -48,7 +48,7 @@ public class DatabaseService {
         while (rs.next()) {
             InventoryModel inventoryModel = new InventoryModel();
             int id = Integer.parseInt(rs.getString("id"));
-            String name = rs.getString("item");
+            String name = rs.getString("item").toLowerCase();
             int quantity = rs.getInt("quantity");
             inventoryModel.setId(id);
             inventoryModel.setItem(name);
@@ -60,6 +60,7 @@ public class DatabaseService {
     }
 
     public void addInventoryItem(InventoryModel item) throws SQLException {
+        item.setItem(item.getItem().toLowerCase());
         InventoryRepository inventoryRepositoryItem = new InventoryRepository();
         inventoryRepositoryItem.setItem(String.valueOf(item.getItem()));
         inventoryRepositoryItem.setQuantity(item.getQuantity());
@@ -73,20 +74,23 @@ public class DatabaseService {
     }
 
     public void addNewItemAndQuantity(InventoryModel item) throws SQLException {
+        item.setItem(item.getItem().toLowerCase());
         PreparedStatement preparedStatement = database.prepareStatement(ADD_ITEM_QUERY);
         preparedStatement.setString(1, item.getItem());
         preparedStatement.setString(2, String.valueOf(item.getQuantity()));
         preparedStatement.executeUpdate();
     }
 
-    public void updateItemQuantity(InventoryModel inventoryModel) throws SQLException {
+    public void updateItemQuantity(InventoryModel item) throws SQLException {
+        item.setItem(item.getItem().toLowerCase());
         PreparedStatement preparedStatement = database.prepareStatement(UPDATE_ITEM_QUANTITY_QUERY);
-        preparedStatement.setInt(1, inventoryModel.getQuantity());
-        preparedStatement.setString(2, inventoryModel.getItem());
+        preparedStatement.setInt(1, item.getQuantity());
+        preparedStatement.setString(2, item.getItem());
         preparedStatement.executeUpdate();
     }
 
     public void deleteItemFromInventory(String itemName, int quantity) throws SQLException {
+        itemName = itemName.toLowerCase();
         PreparedStatement preparedStatement = database.prepareStatement(DELETE_ITEM_QUERY);
         preparedStatement.setInt(1, quantity);
         preparedStatement.setString(2, itemName);
@@ -97,7 +101,7 @@ public class DatabaseService {
     public boolean doesInventoryContainItem(InventoryModel inventoryModel) throws SQLException {
         statement = database.createStatement();
         PreparedStatement preparedStatement = database.prepareStatement(NEW_ADD_ITEM_QUERY);
-        preparedStatement.setString(1, inventoryModel.item);
+        preparedStatement.setString(1, inventoryModel.item.toLowerCase());
         ResultSet rs = preparedStatement.executeQuery();
         return rs.next();
     }
