@@ -67,7 +67,9 @@ async function deleteItem() {
 
 async function displayInventory() {
     const data = await getInventory();
-    let tableHTML = '<table border="1"><tr>';
+    let tableHTML = '<div class="table-responsive">';
+    tableHTML += '<table class="table table-striped table-hover table-bordered">';
+    tableHTML += '<thead class="table-dark"><tr>';
 
     // Create header name for each inventory column
     Object.keys(data[0]).forEach(key => {
@@ -86,7 +88,7 @@ async function displayInventory() {
     }
 
     // Close table and add to the HTML
-    tableHTML += "</table>";
+    tableHTML += '</table></div>';
     document.getElementById("inventoryTable").innerHTML = tableHTML;
 }
 

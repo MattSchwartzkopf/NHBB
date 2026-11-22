@@ -4,33 +4,37 @@
     <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
     <title>NHBB</title>
+
+<!--    Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+<!--    End Bootstrap-->
 </head>
-<body>
+<body class="container mt-5">
     <h1 class="header">NHBB Inventory Management</h1>
-    <div>
-        <h3 style="font-size: 35px">Inventory</h3>
-        <p id="output"></p>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Current Inventory</h2>
         <div id="inventoryTable"></div>
     </div>
 
     <div>
         <!-- Add new item to inventory   -->
-        <form>
+        <form class="form-label">
             <h3>Add new item to inventory</h3>
-            <label for="addItemInput">Item name:</label>
-            <input class="input-box" type="text" id="addItemInput" placeholder="Item"><br>
-            <label for="addQuantityInput">Quantity:</label>
-            <input class="input-box" type="text" id="addQuantityInput" placeholder="Quantity"><br><br>
-            <button type=button id="submitAddItem" style="font-size: 20px">Add</button>
+            <label class="form-label" for="addItemInput">Item name:</label>
+            <input  class="form-control" type="text" id="addItemInput" placeholder="Item"><br>
+            <label class="form-label" for="addQuantityInput">Quantity:</label>
+            <input  class="form-control" type="text" id="addQuantityInput" placeholder="Quantity"><br><br>
+            <button class="btn btn-primary" type=button id="submitAddItem" style="font-size: 20px">Add</button>
         </form>
         <!-- Delete item from inventory   -->
-        <form>
+        <form class="form-label">
             <h3>Delete item from inventory</h3>
-            <label for="deleteItemInput">Item name:</label>
-            <input class="input-box" type="text" id="deleteItemInput" placeholder="Item"><br>
-            <label for="deleteQuantityInput">Quantity:</label>
-            <input class="input-box" type="text" id="deleteQuantityInput" placeholder="Quantity"><br><br>
-            <button type=button id="submitDeleteItem" style="font-size: 20px">Delete</button>
+            <label class="form-label" for="deleteItemInput">Item name:</label>
+            <input  class="form-control" type="text" id="deleteItemInput" placeholder="Item"><br>
+            <label class="form-label" for="deleteQuantityInput">Quantity:</label>
+            <input  class="form-control" type="text" id="deleteQuantityInput" placeholder="Quantity"><br><br>
+            <button class="btn btn-danger" type=button id="submitDeleteItem" style="font-size: 20px">Delete</button>
         </form>
     </div>
 
