@@ -59,7 +59,7 @@ public class DatabaseService {
         inventoryRepositoryItem.setItem(String.valueOf(item.getItem()));
         inventoryRepositoryItem.setQuantity(item.getQuantity());
 
-        // If item doesn't already exists, add new item
+        // If item doesn't already exist, add new item
         if (!doesInventoryContainItem(item)) {
             addNewItemAndQuantity(item);
         } else { // item exists, update quantity on that item

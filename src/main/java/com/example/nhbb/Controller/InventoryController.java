@@ -31,7 +31,7 @@ public class InventoryController {
     }
 
     @DeleteMapping(value = "/deleteItem")
-    public ResponseEntity<String> deleteItem(@RequestParam String itemName, int quantity) throws SQLException {
+    public ResponseEntity<String> deleteItem(@RequestParam String itemName, @RequestParam int quantity) throws SQLException {
         inventoryService.deleteInventoryItem(itemName, quantity);
         return ResponseEntity.status(HttpStatus.OK).body("Delete successful!");
     }

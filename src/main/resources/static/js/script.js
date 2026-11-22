@@ -12,8 +12,8 @@ async function getInventory() {
 }
 
 async function addItem() {
-    const item = document.getElementById("itemInput").value.trim();
-    const quantity = Number(document.getElementById("quantityInput").value);
+    const item = document.getElementById("addItemInput").value.trim();
+    const quantity = Number(document.getElementById("addQuantityInput").value);
 
     const params = {
         item: item,
@@ -40,7 +40,30 @@ async function addItem() {
     await displayInventory();
 }
 
-document.getElementById("submit").addEventListener("click", addItem);
+async function deleteItem() {
+    const item = document.getElementById("deleteItemInput").value.trim();
+    const quantity = Number(document.getElementById("deleteQuantityInput").value);
+
+    const params = {
+        item: item,
+        quantity: quantity
+    };
+
+    try {
+        const url = `http://localhost:8080/inventory/deleteItem?itemName=${encodeURIComponent(item)}&quantity=${quantity}`;
+        const response = await fetch(url, {
+            method: "DELETE"
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        console.log("Successfully deleted item!");
+    } catch (error) {
+        console.error("Error deleting item:", error);
+    }
+    await displayInventory();
+}
 
 async function displayInventory() {
     const data = await getInventory();
@@ -66,3 +89,6 @@ async function displayInventory() {
     tableHTML += "</table>";
     document.getElementById("inventoryTable").innerHTML = tableHTML;
 }
+
+document.getElementById("submitAddItem").addEventListener("click", addItem);
+document.getElementById("submitDeleteItem").addEventListener("click", deleteItem);
