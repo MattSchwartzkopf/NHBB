@@ -5,16 +5,29 @@
     <title>NHBB</title>
 </head>
 <body>
+    <h1>NHBB Inventory Management</h1>
     <div>
-        <button onClick="displayInventory()">Get Data</button>
+        <button style="font-size: 20px" onClick="displayInventory()">View Inventory</button><br><br>
     </div>
+
     <div>
+        <!-- Add new item to inventory   -->
         <form>
-            <label for="itemInput">Item name</label>
-            <input type="text" id="itemInput" placeholder="Item">
-            <label for="quantityInput">Quantity</label>
-            <input type="text" id="quantityInput" placeholder="Quantity">
-            <button type=button id="submit">Submit</button>
+            <h3>Add new item to inventory</h3>
+            <label for="addItemInput">Item name</label>
+            <input type="text" id="addItemInput" placeholder="Item"><br>
+            <label for="addQuantityInput">Quantity</label>
+            <input type="text" id="addQuantityInput" placeholder="Quantity"><br><br>
+            <button type=button id="submitAddItem" style="font-size: 20px">Submit</button>
+        </form>
+        <!-- Delete item from inventory   -->
+        <form>
+            <h3>Delete item from inventory</h3>
+            <label for="deleteItemInput">Item name</label>
+            <input type="text" id="deleteItemInput" placeholder="Item"><br>
+            <label for="deleteQuantityInput">Quantity</label>
+            <input type="text" id="deleteQuantityInput" placeholder="Quantity"><br><br>
+            <button type=button id="submitDeleteItem" style="font-size: 20px">Submit</button>
         </form>
         <p id="output"></p>
         <div id="inventoryTable"></div>
