@@ -4,7 +4,12 @@ import com.example.nhbb.Model.InventoryModel;
 import com.example.nhbb.Repository.InventoryRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +22,7 @@ public class DatabaseService {
     private final String NEW_ADD_ITEM_QUERY = "SELECT id, item, quantity FROM inventory WHERE item = ?";
     private final String UPDATE_ITEM_QUANTITY_QUERY = "UPDATE inventory SET quantity = quantity + ? WHERE item = ?";
     private final String DELETE_ITEM_QUERY = "UPDATE inventory SET quantity = quantity - ? WHERE item = ? AND quantity >= ?";
-    private final String SELECT_ALL_INVENTORY_QUERY = "select * from inventory";
+    private final String SELECT_ALL_INVENTORY_QUERY = "SELECT * FROM inventory";
     private final String DATABASE_CONNECTION_URL = "jdbc:mysql://localhost:8889/sys";
     private final String DATABASE_CONNECTION_USERNAME = "root";
     private final String DATABASE_CONNECTION_PASSWORD = "root";
