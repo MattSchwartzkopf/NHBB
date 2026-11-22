@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
     <title>NHBB</title>
 </head>
 <body>
-    <h1>NHBB Inventory Management</h1>
+    <h1 class="header">NHBB Inventory Management</h1>
     <div>
-        <button style="font-size: 20px" onClick="displayInventory()">View Inventory</button><br><br>
+        <h3 style="font-size: 35px">Inventory</h3>
+        <p id="output"></p>
+        <div id="inventoryTable"></div>
     </div>
 
     <div>
         <!-- Add new item to inventory   -->
         <form>
             <h3>Add new item to inventory</h3>
-            <label for="addItemInput">Item name</label>
-            <input type="text" id="addItemInput" placeholder="Item"><br>
-            <label for="addQuantityInput">Quantity</label>
-            <input type="text" id="addQuantityInput" placeholder="Quantity"><br><br>
-            <button type=button id="submitAddItem" style="font-size: 20px">Submit</button>
+            <label for="addItemInput">Item name:</label>
+            <input class="input-box" type="text" id="addItemInput" placeholder="Item"><br>
+            <label for="addQuantityInput">Quantity:</label>
+            <input class="input-box" type="text" id="addQuantityInput" placeholder="Quantity"><br><br>
+            <button type=button id="submitAddItem" style="font-size: 20px">Add</button>
         </form>
         <!-- Delete item from inventory   -->
         <form>
             <h3>Delete item from inventory</h3>
-            <label for="deleteItemInput">Item name</label>
-            <input type="text" id="deleteItemInput" placeholder="Item"><br>
-            <label for="deleteQuantityInput">Quantity</label>
-            <input type="text" id="deleteQuantityInput" placeholder="Quantity"><br><br>
-            <button type=button id="submitDeleteItem" style="font-size: 20px">Submit</button>
+            <label for="deleteItemInput">Item name:</label>
+            <input class="input-box" type="text" id="deleteItemInput" placeholder="Item"><br>
+            <label for="deleteQuantityInput">Quantity:</label>
+            <input class="input-box" type="text" id="deleteQuantityInput" placeholder="Quantity"><br><br>
+            <button type=button id="submitDeleteItem" style="font-size: 20px">Delete</button>
         </form>
-        <p id="output"></p>
-        <div id="inventoryTable"></div>
     </div>
 
 <script src="js/script.js"></script>

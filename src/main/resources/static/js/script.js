@@ -92,3 +92,8 @@ async function displayInventory() {
 
 document.getElementById("submitAddItem").addEventListener("click", addItem);
 document.getElementById("submitDeleteItem").addEventListener("click", deleteItem);
+
+// Always initially load current inventory
+document.addEventListener("DOMContentLoaded", () => {
+    displayInventory();
+});
